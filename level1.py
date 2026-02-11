@@ -18,3 +18,7 @@ def filter_by_size(data):
     list_of_packages_larger_than_5000=[i for i in data if int(i[-1]) > 5000]
     return list_of_packages_larger_than_5000
 
+def traffic_labeling(data):
+    list_of_dicts={str(row):"LARGE" if int(row[-1])>5000 else "NORMAL" for row in data}
+    return list_of_dicts
+
