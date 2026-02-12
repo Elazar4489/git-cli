@@ -19,3 +19,6 @@ def filter_by_size(data):
 def traffic_labeling(data):
     list_of_dicts={str(row):["LARGE"] if int(row[-1])>5000 else ["NORMAL"] for row in data}
     return list_of_dicts
+
+def filter_by_time(data):
+    return [row for row in data if "00:00:00" < row[0][11:19] < "06:00:00"]
