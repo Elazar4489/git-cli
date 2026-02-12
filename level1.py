@@ -4,8 +4,6 @@ def generates_a_matrix_of_data(path):
         matrix_of_data=[w for w in [l.split(",") for l in log.readlines()]]
     return matrix_of_data
 
-a=generates_a_matrix_of_data('network_traffic.log')
-
 def extracting_external_IP_addresses(data):
     list_of_external_IP=[i[1] for i in data if not i[1].startswith("192.168") and not i[1].startswith("10.")]
     return list_of_external_IP
@@ -19,6 +17,5 @@ def filter_by_size(data):
     return list_of_packages_larger_than_5000
 
 def traffic_labeling(data):
-    list_of_dicts={str(row):"LARGE" if int(row[-1])>5000 else "NORMAL" for row in data}
+    list_of_dicts={str(row):["LARGE"] if int(row[-1])>5000 else ["NORMAL"] for row in data}
     return list_of_dicts
-
