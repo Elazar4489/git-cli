@@ -1,8 +1,9 @@
-import level1 as l1
+from level1 import generates_a_matrix_of_data as g
 
-a=l1.generates_a_matrix_of_data('network_traffic.log')
-def extracting_time_from_timestamp(data):
-    return list(map(lambda s: int(s[0][11:13]),data))
 
-def package_size_conversion(data):
-    return list(map(lambda b: int(b[-1])/1024,data))
+a=g('network_traffic.log')
+extracting_time_from_timestamp=list(map(lambda s: int(s[0][11:13]),g('network_traffic.log')))
+
+package_size_conversion= list(map(lambda b: int(b[-1])/1024,g('network_traffic.log')))
+
+filter_rows_by_port=list(filter(lambda p:p[-3] == "22" or p[-3]== "23" or p[-3]=="3389",g('network_traffic.log')))
