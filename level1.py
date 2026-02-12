@@ -4,13 +4,11 @@ def generates_a_matrix_of_data(path):
         matrix_of_data=[w for w in [l.split(",") for l in log.readlines()]]
     return matrix_of_data
 
-a=generates_a_matrix_of_data('network_traffic.log')
-
-def extracting_external_IP_addresses(data):
+def extracting_external_IP_addresses(data) -> list[str]:
     list_of_external_IP=[i[1] for i in data if not i[1].startswith("192.168") and not i[1].startswith("10.")]
     return list_of_external_IP
 
-def filtering_by_sensitive_port(data):
+def filtering_by_sensitive_port(data) -> list[list[str]]:
     list_of_sensitive_port = [i for i in data if  i[3]== '22' or i[3]== '23' or i[3]== '3389']
     return list_of_sensitive_port
 
@@ -19,6 +17,8 @@ def filter_by_size(data):
     return list_of_packages_larger_than_5000
 
 def traffic_labeling(data):
-    list_of_dicts={str(row):"LARGE" if int(row[-1])>5000 else "NORMAL" for row in data}
+    list_of_dicts={str(row):["LARGE"] if int(row[-1])>5000 else ["NORMAL"] for row in data}
     return list_of_dicts
 
+def filter_by_time(data):
+    return [row for row in data if "00:00:00" < row[0][11:19] < "06:00:00"]
