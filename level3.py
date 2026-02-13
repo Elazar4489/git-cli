@@ -15,3 +15,5 @@ suspicion_checks = { "EXTERNAL_IP": lambda row: True if not row[1].startswith("1
                      "LARGE_PACKET":lambda row: True if int(row[-1]) > 5000 else False,
                      "NIGHT_ACTIVITY": lambda row: True if "00:00:00" < row[0][11:19] < "06:00:00" else False}
 
+def running_tests_on_a_line(row):
+    return list(filter(lambda k: suspicion_checks[k](row), suspicion_checks))
