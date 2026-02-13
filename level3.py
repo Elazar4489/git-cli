@@ -17,3 +17,5 @@ suspicion_checks = { "EXTERNAL_IP": lambda row: True if not row[1].startswith("1
 
 def running_tests_on_a_line(row):
     return list(filter(lambda k: suspicion_checks[k](row), suspicion_checks))
+
+processing_the_entire_log=list(filter(lambda r: any(r.values()),map(lambda row: {str(row): running_tests_on_a_line(row)},a)))
