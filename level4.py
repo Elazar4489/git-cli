@@ -17,3 +17,9 @@ def counting_without_loading_into_memory(lines_generator):
     return sum(1 for line in lines_generator)
 
 
+def chain_generators(path):
+    lines_gen = generates_a_matrix_of_data(path)
+    suspicious_gen = filtering_suspicious_lines_with_yield(lines_gen)
+    detailed_gen = returning_suspicions_with_row_details(suspicious_gen)
+    total_count = counting_without_loading_into_memory(detailed_gen)
+    return total_count
