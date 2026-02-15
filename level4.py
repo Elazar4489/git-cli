@@ -6,14 +6,14 @@ def generates_a_matrix_of_data(path):
             line=[w for w in line.split(",")]
             yield list(line)
 
-def filtering_suspicious_lines_with_yield(path):
-    k=[line for line in generates_a_matrix_of_data(path) if len(running_tests_on_a_line(line)) >=1]
-    return k
+def filtering_suspicious_lines_with_yield(lines_generator):
+    return (line for line in lines_generator if len(running_tests_on_a_line(line)) >=1)
 
-def returning_suspicions_with_row_details(path):
-    k = [(line,running_tests_on_a_line(line))  for line in generates_a_matrix_of_data(path) if len(running_tests_on_a_line(line)) >= 1]
-    return k
 
-def counting_without_loading_into_memory(path):
-    counter=sum(1 for line in generates_a_matrix_of_data(path) if len(running_tests_on_a_line(line)) >=1)
-    return counter
+def returning_suspicions_with_row_details(lines_generator):
+    return ((line,running_tests_on_a_line(line))  for line in lines_generator)
+
+def counting_without_loading_into_memory(lines_generator):
+    return sum(1 for line in lines_generator)
+
+
