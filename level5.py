@@ -16,3 +16,7 @@ def generate_report(path):
            f"{"\n".join([f"- {k}: {", ".join(v)}" for k,v in suspicious_dict.items() if len(v) < 3])}")
     return IPs_report
 
+def save_report(report, filepath):
+    with open(filepath, "w" ,encoding="utf-8") as fp:
+        fp.write(report)
+    return "The report was saved successfully!"
